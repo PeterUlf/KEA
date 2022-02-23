@@ -51,9 +51,13 @@
     align-items: center;
       padding: 20px;   
       background-color: #457B9D;
+      flex-wrap: wrap;
+
   }
   header > *:first-child{
-    width:100%;
+  
+   margin-right: auto;
+
   }
 
   nav, ul {
@@ -64,7 +68,8 @@
       padding: 20px;
       /* min-width: 150px; */
       color: #1D3557;
-      white-space: nowrap;
+      /* white-space: nowrap; */
+      flex-shrink: 0;
   }
 
   li:not(:first-child):before {
