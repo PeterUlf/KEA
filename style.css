@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
 * {
     margin: 0;
     box-sizing: border-box;
@@ -5,6 +7,7 @@
 
   body{
       background-color: #A8DADC;
+      font-family: 'Noto Sans', sans-serif;
   }
  
   .wrapper{
@@ -40,6 +43,7 @@
       line-height: normal;
       font-size: 2rem;
       color: #1D3557;
+      font-family: 'Bebas Neue', cursive;
   }
 
   header {
@@ -63,8 +67,16 @@
       white-space: nowrap;
   }
 
+  li:not(:first-child):before {
+    display: inline-block;
+    content: "-";
+    width: 1em;
+    margin-left: -1em;
+    color: #A8DADC;}
+
   h1{
       color:#1D3557;
+      font-family: 'Bebas Neue', cursive;
   }
 
   p{
