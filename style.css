@@ -1,0 +1,30 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+h2{
+    position: sticky;
+    top:0;
+    text-align: right;
+    background-color: brown;
+}
+header{
+    display: flex;
+    gap: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+
+
+}
+nav, ul{
+    display: contents;
+     list-style-type: none;
+     width: 100%;
+}
+
+
+
+header>*:first-child{
+    background-color: blueviolet;
+    margin-right: auto;
+}
