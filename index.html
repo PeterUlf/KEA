@@ -1,22 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
     <title>Code Skelleton</title>
-</head>
-<body>
+  </head>
+  <body>
     <h1>Her kommer data</h1>
 
     <!--Make sure the form has the autocomplete function switched off:-->
-<form autocomplete="off" action="/action_page.php">
-  <div class="autocomplete" style="width:300px;">
-    <input id="myInput" type="text" name="myWord" placeholder="Type a word/skriv et ord">
-  </div>
-  <input type="submit">
-</form>
-    
+    <form autocomplete="off" action="/action_page.php">
+      <div class="autocomplete">
+        <input id="myInput" type="text" name="myWord" placeholder="&#128269;" />
+      </div>
+
+      <div class="autocomplete">
+        <input id="myTheme" type="text" name="myTheme" placeholder="Tema" />
+      </div>
+      <div class="autocomplete">
+        <input
+          id="myExplain"
+          type="text"
+          name="myExplain"
+          placeholder="Forklaring kommer her/ Explaination placeholder"
+        />
+      </div>
+
+      <input type="submit" value="Søg" />
+    </form>
+
     <script src="javaScript.js"></script>
-</body>
+  </body>
 </html>

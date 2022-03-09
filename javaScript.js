@@ -1,31 +1,33 @@
 let myHeaders = {
   "x-apikey": "6225f2a2dced170e8c839fef	",
 };
+
 document.addEventListener("DOMContentLoaded", loadJSON);
 
+// let JSONContent;
+
 async function loadJSON() {
-  const JSONData = await fetch("https://keawords-3374.restdb.io/rest/keawords  ", {
-    headers: myHeaders,
-  });
+  const JSONData = await fetch(
+    "https://keawords-3374.restdb.io/rest/keawords  ",
+    {
+      headers: myHeaders,
+    }
+  );
   const JSONContent = await JSONData.json();
 
-  showContent(JSONContent);
+  // showContent(JSONContent);
   console.log("JSONContent", JSONContent);
-}
 
-//fetch('https://testdatabase-88a3.restdb.io/rest/contact', {
-//        headers: myHeaders
-//    })
-//    .then(response => response.json())
-//    .then(data => console.log(data));
-
-function showContent(json) {
-  console.log("JSONContent", json);
+  autocomplete(document.getElementById("myInput"), JSONContent);
+  document.getElementById("myInput").focus();
 }
 
 function autocomplete(inp, arr) {
   /*the autocomplete function takes two arguments,
   the text field element and an array of possible autocompleted values:*/
+  console.log(arr);
+  console.log(inp);
+
   var currentFocus;
   /*execute a function when someone writes in the text field:*/
   inp.addEventListener("input", function (e) {
@@ -48,14 +50,18 @@ function autocomplete(inp, arr) {
     /*for each item in the array...*/
     for (i = 0; i < arr.length; i++) {
       /*check if the item starts with the same letters as the text field value:*/
-      if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+      if (
+        arr[i].word.substr(0, val.length).toUpperCase() == val.toUpperCase()
+      ) {
         /*create a DIV element for each matching element:*/
         b = document.createElement("DIV");
         /*make the matching letters bold:*/
-        b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
-        b.innerHTML += arr[i].substr(val.length);
+        b.innerHTML =
+          "<strong>" + arr[i].word.substr(0, val.length) + "</strong>";
+        b.innerHTML += arr[i].word.substr(val.length);
         /*insert a input field that will hold the current array item's value:*/
-        b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+        b.innerHTML += "<input type='hidden' value='" + arr[i].word + "'>";
+        b.setAttribute("data-id", arr[i]._id);
         /*execute a function when someone clicks on the item value (DIV element):*/
         b.addEventListener("click", function (e) {
           /*insert the value for the autocomplete text field:*/
@@ -120,12 +126,39 @@ function autocomplete(inp, arr) {
         x[i].parentNode.removeChild(x[i]);
       }
     }
+    if (elmnt) {
+      //  explanation(elmnt.dataset.id, arr);
+      explanation(elmnt.innerText, arr);
+    }
   }
   /*execute a function when someone clicks in the document:*/
-  document.addEventListener("click", function (e) {
-    console.log("document klikket på");
-    closeAllLists(e.target);
-  });
+  // document.addEventListener("click", function (e) {
+  document
+    // .querySelector("#myInputautocomplete-list")
+    .addEventListener("click", function (e) {
+      console.log("document klikket på");
+      closeAllLists(e.target);
+    });
 }
 
-autocomplete(document.getElementById("myInput"), countries);
+function explanation(searchWord, words) {
+  console.log("searchWord er ", searchWord);
+
+  const results = words.filter((singleWord) => singleWord.word == searchWord);
+  //reset content
+  document.querySelector("#myTheme").value = "";
+
+  results.forEach((result) => {
+    if (Array.isArray(result.themes) && result.themes.length > 1) {
+      result.themes.forEach((theme) => {
+        //document.querySelector("#myTheme").value += theme + ", ";
+        console.log("theme: ", theme);
+      });
+    } else {
+      //document.querySelector("#myTheme").value = result[0].themes;
+      console.log("theme: ", result.themes[0]);
+    }
+
+    //document.querySelector("#myExplain").value = result[0].explanation;
+  });
+}
