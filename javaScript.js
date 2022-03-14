@@ -147,18 +147,33 @@ function explanation(searchWord, words) {
   const results = words.filter((singleWord) => singleWord.word == searchWord);
   //reset content
   document.querySelector("#myTheme").value = "";
+  document.querySelector("#myContent").textContent = "";
+  console.log(results);
 
   results.forEach((result) => {
+    var template = document.querySelector("#wordRow");
+    var clone = template.content.cloneNode(true);
+
+    clone.querySelector(".myInputRslt").textContent = result.word;
+
+    //let theme = clone.querySelector(".myThemeRslt").textContent;
+    //theme = result.word;
+    clone.querySelector(".myExplainRslt").textContent = result.explanation;
+
     if (Array.isArray(result.themes) && result.themes.length > 1) {
       result.themes.forEach((theme) => {
         //document.querySelector("#myTheme").value += theme + ", ";
+
         console.log("theme: ", theme);
+        clone.querySelector(".myThemeRslt").innerHTML += theme + "<br> ";
       });
     } else {
       //document.querySelector("#myTheme").value = result[0].themes;
       console.log("theme: ", result.themes[0]);
+      clone.querySelector(".myThemeRslt").textContent = result.themes[0];
     }
 
     //document.querySelector("#myExplain").value = result[0].explanation;
+    document.querySelector("#myContent").appendChild(clone);
   });
 }

@@ -13,23 +13,46 @@
     <!--Make sure the form has the autocomplete function switched off:-->
     <form autocomplete="off" action="/action_page.php">
       <div class="autocomplete">
-        <input id="myInput" type="text" name="myWord" placeholder="&#128269;" />
+        <input id="myInput" type="text" name="myWord" placeholder="&#128269; Ord" />
       </div>
 
       <div class="autocomplete">
-        <input id="myTheme" type="text" name="myTheme" placeholder="Tema" />
+        <input id="myTheme" type="text" name="myTheme" placeholder="&#128269;Tema" />
       </div>
+
+  
+
+
       <div class="autocomplete">
         <input
           id="myExplain"
           type="text"
           name="myExplain"
-          placeholder="Forklaring kommer her/ Explaination placeholder"
+          placeholder="&#128269;Forklaring"
         />
       </div>
 
       <input type="submit" value="Søg" />
     </form>
+    <br>
+    <div id="myContent"></div>
+
+    <template id="wordRow">
+      <div class="rslt">
+        <div class="myInputRslt"/> </div>
+      </div>
+
+      <div class="rslt">
+        <div class="myThemeRslt"  /> </div>
+      </div>
+
+      <div class="rslt">
+        <div class="myExplainRslt"  /> </div>
+      </div>
+      <div class="rslt">
+        <div class="myEdit"  />... </div>
+      </div>
+    </template>
 
     <script src="javaScript.js"></script>
   </body>

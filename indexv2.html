@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="da">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style_v2.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+    <title>Multimediedesigner Ord</title>
+  </head>
+  <body>
+    <section id="wrapper">
+      <form action="">
+        <div class="first">
+          <input
+            list="search_words"
+            id="search_word"
+            type="text"
+            placeholder="&#128269; Ord"
+          />
+        </div>
+        <datalist id="search_words"> </datalist>
+
+        <div class="first">
+          <input
+            list="search_themes"
+            id="search_theme"
+            type="text"
+            placeholder="&#128269;Tema"
+          />
+        </div>
+        <datalist id="search_themes"> </datalist>
+
+        <div class="first">
+          <input
+            list="search_descriptions"
+            id="search_description"
+            type="text"
+            placeholder="&#128269;Forklaring"
+          />
+        </div>
+        <datalist id="search_descriptions"> </datalist>
+
+        <div id="search_button" class="first" style="text-align: center">
+          <a href="#">Find</a>
+        </div>
+
+        <div class="spacer search_word"></div>
+        <div class="spacer search_theme"></div>
+        <div class="spacer search_description"></div>
+        <div class="spacer edit_button"></div>
+      </form>
+
+      <form id="content" action=""></form>
+      <template id="my_result">
+        <div class="search_word"></div>
+        <div class="search_theme"></div>
+        <div class="search_description"></div>
+        <div class="edit_button" style="text-align: center">...</div>
+      </template>
+
+      <template id="datalist_builder">
+        <option value=""></option>
+      </template>
+    </section>
+    <div class="preloader"><span></span></div>
+  </body>
+  <script src="javaScript_v2.js"></script>
+</html>
