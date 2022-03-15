@@ -1,9 +1,9 @@
 let myHeaders = {
   "x-apikey": "6225f2a2dced170e8c839fef	",
 };
+let results4;
+let background = "odd";
 const searchWord = document.querySelector("#search_word");
-const searchTheme = document.querySelector("#search_theme");
-const searchDescription = document.querySelector("#search_description");
 
 document.addEventListener("DOMContentLoaded", loadJSON);
 
@@ -21,38 +21,14 @@ async function loadJSON() {
   }
 
   searchWord.addEventListener("keyup", function () {
-    seachResult(searchWord, searchTheme, searchDescription, JSONContent);
+    seachResult(searchWord, JSONContent);
   });
-  searchTheme.addEventListener("keyup", function () {
-    seachResult(searchWord, searchTheme, searchDescription, JSONContent);
-  });
-  searchDescription.addEventListener("keyup", function () {
-    seachResult(searchWord, searchTheme, searchDescription, JSONContent);
-  });
-  // datalistWord(JSONContent);
-  // datalistTheme(JSONContent);
 }
 
-// function datalistWord(data) {
-//   data.forEach((result) => {
-//     const template = document.querySelector("#datalist_builder");
-//     const clone = template.content.cloneNode(true);
-//     clone.querySelector("option").value = result.word;
-//     document.querySelector("#search_words").appendChild(clone);
-//   });
-// }
-// function datalistTheme(data) {
-//   data.forEach((result) => {
-//     const template = document.querySelector("#datalist_builder");
-//     const clone = template.content.cloneNode(true);
-//     clone.querySelector("option").value = result.themes;
-//     document.querySelector("#search_themes").appendChild(clone);
-//   });
-// }
-
-function seachResult(word, theme, description, arr) {
+function seachResult(word, arr) {
   console.log("seachResult");
   // tøm content før det rettes til
+
   document.querySelector("#content").textContent = "";
 
   //filter array her
@@ -65,21 +41,21 @@ function seachResult(word, theme, description, arr) {
       return true;
     }
   });
-  console.log(results1);
-  let results2 = results1.filter((singleWord) => {
+  console.log("results1", results1);
+  let results2 = arr.filter((singleWord) => {
     //hvis søgeboxen for tema IKKE er tom
-    if (theme.value != "") {
-      console.log("temasøg er ikke tom");
-      console.log(singleWord.themes);
+    if (searchWord.value != "") {
+      //console.log("temasøg er ikke tom");
+      //console.log(singleWord.themes);
       //her bruges "some" til at tjekke om søge temaet er en del af der der står i databasne
       //jeg forstår ikke helt nedenstående, men det bruges sammen med some
       //jeg bruger det til at tjekke hvert element og om det der er skrevet i søgeboksen er en del af det ord der er i arrayet
       const likeInputTheme = (element) =>
-        element.toLowerCase().includes(theme.value.toLowerCase());
+        element.toLowerCase().includes(word.value.toLowerCase());
 
       //hvis nedenstående er sandt kommer den med i filteret
       if (typeof singleWord.themes == "string") {
-        return singleWord.themes.includes(theme.value.toLowerCase());
+        return singleWord.themes.includes(word.value.toLowerCase());
       } else {
         return singleWord.themes.some(likeInputTheme);
       }
@@ -89,15 +65,16 @@ function seachResult(word, theme, description, arr) {
       return true;
     }
   });
+  console.log("results2", results2);
 
-  let results3 = results2.filter((singleWord) => {
+  let results3 = arr.filter((singleWord) => {
     //hvis søgeboxen for beskrivelse IKKE er tom
-    if (description.value != "") {
+    if (word.value != "") {
       console.log("søgefeltet beskr er IKKE tomt");
       //hvis nedenstående er sandt kommer den med i filteret
       return singleWord.explanation
         .toLowerCase()
-        .includes(description.value.toLowerCase());
+        .includes(word.value.toLowerCase());
     } else {
       //hvis søgeboxen for beskrivelse ER tom
       console.log("søgefeltet beskr er  tomt");
@@ -105,27 +82,61 @@ function seachResult(word, theme, description, arr) {
     }
   });
 
-  let background = "odd";
-  results3.forEach((result) => {
-    const template = document.querySelector("#my_result");
-    const clone = template.content.cloneNode(true);
-    if (background == "even") {
-      background = "odd";
-    } else {
-      background = "even";
-    }
-    ////console.log(result.word);
-    clone.querySelector(".search_word").textContent = result.word;
-    clone.querySelector(".search_word").classList.add(background);
+  console.log("results3", results3);
 
-    clone.querySelector(".search_theme").textContent = result.themes;
-    clone.querySelector(".search_theme").classList.add(background);
+  results4 = results1.concat(results2.concat(results3));
+  console.log("results4", results4);
 
-    clone.querySelector(".search_description").textContent = result.explanation;
-    clone.querySelector(".search_description").classList.add(background);
+  document.querySelector("#content").textContent = "";
 
-    clone.querySelector(".edit_button").classList.add(background);
-
-    document.querySelector("#content").appendChild(clone);
+  results4.forEach((result) => {
+    generateListItem(result);
   });
+}
+function generateEditItem(result, id) {}
+
+function generateListItem(result, id) {
+  const template = document.querySelector("#my_result");
+
+  const clone = template.content.cloneNode(true);
+  if (background == "even") {
+    background = "odd";
+  } else {
+    background = "even";
+  }
+
+  console.log(result.word);
+  clone.querySelector(".search_word").textContent = result.word;
+  clone.querySelector(".search_word").classList.add(background);
+
+  clone.querySelector(".search_theme").textContent = result.themes;
+  //clone.querySelector(".search_theme").textContent = "her kommer theme";
+  clone.querySelector(".search_theme").classList.add(background);
+
+  clone.querySelector(".search_description").textContent = result.explanation;
+  //clone.querySelector(".search_description").textContent =
+  (" her kommer description");
+  clone.querySelector(".search_description").classList.add(background);
+
+  clone.querySelector(".edit_button").classList.add(background);
+  console.log("id: ", id);
+
+  clone.querySelector(".edit_button").addEventListener("click", () => {
+    edit_form(result._id, results4);
+  });
+  document.querySelector("#content").appendChild(clone);
+}
+
+function edit_form(id, arr) {
+  document.querySelector("#content").textContent = "";
+
+  const mySearchResult = arr.find((x) => x._id === id);
+  const template = document.querySelector("#my_search");
+  const clone = template.content.cloneNode(true);
+  clone.querySelector(".search_word").value = mySearchResult.word;
+  clone.querySelector(".search_theme").value = mySearchResult.themes;
+  clone.querySelector(".search_description").value = mySearchResult.explanation;
+  clone.querySelector(".edit_button").textContent = "gem";
+
+  document.querySelector("#content").appendChild(clone);
 }
