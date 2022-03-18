@@ -1,59 +1,105 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="da">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
-    <title>Code Skelleton</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+    <title>Multimediedesigner Ord</title>
   </head>
   <body>
-    <h1>Her kommer data</h1>
-
-    <!--Make sure the form has the autocomplete function switched off:-->
-    <form autocomplete="off" action="/action_page.php">
-      <div class="autocomplete">
-        <input id="myInput" type="text" name="myWord" placeholder="&#128269; Ord" />
-      </div>
-
-      <!-- <div class="autocomplete">
-        <input id="myTheme" type="text" name="myTheme" placeholder="&#128269;Tema" />
-      </div> -->
-
-  
-
-<!-- 
-      <div class="autocomplete">
+    <section id="wrapper">
+      <form id="search" action="">
         <input
-          id="myExplain"
+          list="search_words"
+          id="search_word"
           type="text"
-          name="myExplain"
-          placeholder="&#128269;Forklaring"
+          placeholder="&#128269; Ord"
+          autocomplete="off"
         />
+
+        <!-- <datalist id="search_words"> </datalist> -->
+
+        <!-- <div class="first">
+          <input
+            list="search_themes"
+            id="search_theme"
+            type="text"
+            placeholder="&#128269;Tema"
+          />
+        </div>
+        <datalist id="search_themes"> </datalist>
+
+        <div class="first">
+          <input
+            list="search_descriptions"
+            id="search_description"
+            type="text"
+            placeholder="&#128269;Forklaring"
+          />
+        </div>
+        <datalist id="search_descriptions"> </datalist> -->
+
+        <div id="search_button" class="first" style="text-align: center">
+          <a href="#">opret MMD term</a>
+        </div>
+
+        <div class="spacer search_word"></div>
+        <div class="spacer search_theme"></div>
+        <div class="spacer search_description"></div>
+        <div class="spacer edit_button"></div>
+      </form>
+
+      <form id="content" action=""></form>
+      <template id="my_result">
+        <div class="search_word"></div>
+        <div class="search_theme"></div>
+        <div class="search_description"></div>
+        <div class="edit_button" style="text-align: center">
+          <a href="#">...</a>
+        </div>
+      </template>
+
+      <template id="my_search">
+        <input class="search_word" />
+        <input class="search_theme" />
+        <textarea class="search_description" /></textarea>
+        <div class="edit_button" style="text-align: center">
+          <a href="#">ret</a>
+        </div>
+      </template>
+
+           <template id="my_edit">
+        <input class="search_word" />
+        <input class="search_theme" />
+        <textarea class="search_description" /></textarea>
+        <div class="edit_button" style="text-align: center">
+                <a href="#" class="save">gem</a>
+                 <a href="#" class="delete">slet</a>
+                  <a href="#" class="cancel">fortryd</a>
+        </div>
+      </template>
+
+      <!-- <div id="my_edit">
+        <div class="search_word"></div>
+        <div class="search_theme"></div>
+        <div class="search_description"></div>
+        <div class="edit_button" style="text-align: center">
+          <a href="#">gem</a>
+        </div>
       </div> -->
 
-      <input type="submit" value="Søg" />
-    </form>
-    <br>
-    <div id="myContent"></div>
-
-    <template id="wordRow">
-      <div class="rslt">
-        <div class="myInputRslt"/> </div>
-      </div>
-
-      <div class="rslt">
-        <div class="myThemeRslt"  /> </div>
-      </div>
-
-      <div class="rslt">
-        <div class="myExplainRslt"  /> </div>
-      </div>
-      <div class="rslt">
-        <div class="myEdit"  />... </div>
-      </div>
-    </template>
-
-    <script src="javaScript.js"></script>
+      <template id="datalist_builder">
+        <option value=""></option>
+      </template>
+    </section>
+    <div class="preloader"><span></span></div>
   </body>
+  <script src="javaScript.js"></script>
 </html>
